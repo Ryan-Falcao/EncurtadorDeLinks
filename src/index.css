@@ -17,6 +17,12 @@ body {
   justify-content: center;
   align-items: center;
   margin-top: 80px;
-  padding-bottom: 200px;
+  padding-bottom: 20px;
   box-sizing: border-box;
+  flex-direction: column;
+}
+.display h1 {
+  font-size: 30px;
+  font-family: sans-serif;
+  color: var(--color-primary);
 }

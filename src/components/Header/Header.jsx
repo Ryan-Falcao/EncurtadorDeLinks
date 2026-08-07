@@ -1,11 +1,11 @@
 import "./Header.css";
 
-function Sidebar() {
+function Header() {
   return (
-    <div className="header">
+    <header className="header">
       <h1>Encurtador de Links</h1>
-    </div>
+    </header>
   );
 }
 
-export default Sidebar;
+export default Header;
