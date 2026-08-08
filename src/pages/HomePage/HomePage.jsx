@@ -31,7 +31,7 @@ function HomePage() {
   function handleCopiar() {
     navigator.clipboard.writeText(linkEncurtado);
     setCopiado(true);
-    setTimeout(() => setCopiado(false), 2000);
+    setTimeout(() => setCopiado(false), 3000);
   }
 
   return (
