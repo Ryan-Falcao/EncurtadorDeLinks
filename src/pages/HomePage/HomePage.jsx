@@ -1,20 +1,37 @@
 import "./HomePage.css";
 import { useState } from "react";
+import { FaLink } from "react-icons/fa6";
+import { FaCopy } from "react-icons/fa6";
+import api from "../../services/api";
 
 function HomePage() {
   const [url, setUrl] = useState("");
   const [linkEncurtado, setLinkEncurtado] = useState(null);
   const [carregando, setCarregando] = useState(false);
   const [erro, setErro] = useState("");
+  const [copiado, setCopiado] = useState(false);
 
   async function handleEncurtar() {
     setCarregando(true);
+    setErro("");
     try {
+      const resposta = await api.post("/api/urls", { urlOriginal: url });
+      setLinkEncurtado(
+        `${import.meta.env.VITE_API_URL}/${resposta.data.urlEncurtada}`,
+      );
     } catch (erro) {
       console.error("Erro ao encurtar:", erro);
+      setErro(
+        "Não foi possível encurtar o link. Verifique a URL e tente novamente.",
+      );
     } finally {
       setCarregando(false);
     }
+  }
+  function handleCopiar() {
+    navigator.clipboard.writeText(linkEncurtado);
+    setCopiado(true);
+    setTimeout(() => setCopiado(false), 2000);
   }
 
   return (
@@ -22,7 +39,9 @@ function HomePage() {
       <div className="container">
         <h1>
           <strong>Encurtador de Link</strong>
+          <FaLink />
         </h1>
+
         <p>Transforme links longos em URLs curtas e fáceis de compartilhar</p>
 
         {!linkEncurtado && (
@@ -49,12 +68,32 @@ function HomePage() {
           </>
         )}
         {linkEncurtado && (
-          <div className="link-container">
-            <p>Seu link encurtado:</p>
-            <a href={linkEncurtado} target="_blank" rel="noopener noreferrer">
-              {linkEncurtado}
-            </a>
-          </div>
+          <>
+            <div className="input-container">
+              <input
+                style={{
+                  color: "#3087f8",
+                  textDecoration: "underline",
+                }}
+                value={linkEncurtado}
+                readOnly
+              />
+              <button onClick={handleCopiar}>
+                {!copiado ? (
+                  <>
+                    Copiar <FaCopy />
+                  </>
+                ) : (
+                  <>Copiado!</>
+                )}
+              </button>
+            </div>
+            {copiado && (
+              <p style={{ color: "green" }}>
+                Link copiado para a área de transferência!
+              </p>
+            )}
+          </>
         )}
       </div>
       <div className="info-container">
