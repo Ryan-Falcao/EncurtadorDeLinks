@@ -88,10 +88,20 @@ function HomePage() {
                 )}
               </button>
             </div>
-            {copiado && (
-              <p style={{ color: "green" }}>
-                Link copiado para a área de transferência!
-              </p>
+            {copiado ? (
+              <>
+                <p style={{ color: "green" }}>
+                  Link copiado para a área de transferência!
+                </p>
+              </>
+            ) : (
+              <>
+                <p>
+                  Opa seu link encurtado está pronto! Clique no botão copiar
+                  para copiar o link e compartilhar onde quiser de maneira
+                  rápida e prática.
+                </p>
+              </>
             )}
           </>
         )}
