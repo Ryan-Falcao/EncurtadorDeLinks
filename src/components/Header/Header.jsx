@@ -1,6 +1,5 @@
 import "./Header.css";
 import { FaLink } from "react-icons/fa6";
-import logo from "../../imagens/LogoEncurtadorDeLinks.png";
 
 function Header() {
   return (
